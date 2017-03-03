@@ -1,0 +1,931 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=gb2312"><title>Ogame中文战斗报告转换工具</title></head><body>
+<script language="JavaScript" type="text/JavaScript">
+/************************************************************************************************************/
+//调色板的配置
+defaultColor = new Array(
+		0xFF0000,0xFFFF00,0x00FFFF,0xFF00FF,
+		0x00FF00,0x008080,0x800000,0x008000,
+		0x0000FF,0x800080,0x000080,0x000000,
+		0x808000,0x808080,0xC0C0C0,0x8000FF
+		);
+setColor = new Array();
+
+function colorInit()
+{
+	for(var i = 1, j = 0, tmp; i< colorTable.rows.length; i++){
+		tmp = (j++) % defaultColor.length;
+		colorTable.rows[i].cells[1].bgColor = defaultColor[tmp];
+		setColor[i-1] = defaultColor[tmp];
+	}
+}
+function colorPicker(index)
+{
+	index.bgColor = dlgHelper.ChooseColorDlg().toString(16);
+	setColor[index.parentNode.rowIndex-1] = index.bgColor;
+	//dstReport.value += index.bgColor + crlf;
+}
+
+
+/************************************************************************************************************/
+//原始战斗报告中行信息的解析
+function playerInfo()
+{
+	this.militancy;
+	this.identity;
+	this.position;
+	this.tech = new Array();
+	this.fleet = new Array();
+	this.survival = new Array();
+	this.fleetnum = new Array();
+	this.survivalnum = new Array();
+	this.lost = new Array();
+}
+
+function combatRpt()
+{
+	this.time;
+	this.result = new Array();
+	this.player = new Array();
+	this.state = 0;
+	this.current = -1;
+}
+
+
+/************************************************************************************************************/
+var serverType;
+var space = "　";
+var crlf="\n";
+var time;
+var account;
+var position;
+var tech;
+var BBStype;
+var unitType={};
+var reType=/\s+(\S+)/g;
+var reNum=/[0-9.]+/g;
+function rptCR()
+{
+	lastresult = 0;
+	cr = new combatRpt();
+	
+	var tmpunit;
+	switch (parseInt(document.getElementsByName("Server")[0].value)) {
+		case 1:
+			tmpunit = new Array(
+				'小型運輸艦','大型運輸艦','輕型戰鬥機','重型戰鬥機',
+				'巡洋艦','戰列艦','殖民船','回收船',
+				'間諜衛星','導彈艦','太陽能衛星','毀滅者',
+				'死星','戰鬥巡洋艦','飛彈發射器','輕型雷射砲','重型雷射砲',
+				'高斯砲','中子砲','等離子武器','小型防護圓頂',
+				'大型防護圓頂'
+				);
+			reAtk = /進攻者 [\w]*[^(]/;
+			reDef = /防禦者 [\w]*[^(]/;
+			serverType=1;
+			break;
+		case 2:
+			tmpunit = new Array(
+				'小型运输舰','大型运输舰','轻型战斗机','重型战斗机',
+				'巡洋舰','战列舰','殖民船','回收船',
+				'探测器','导弹舰','太阳能卫星','毁灭者',
+				'死星','战斗巡洋舰','飞弹发射器.','轻型激光炮','重型激光炮',
+				'高斯炮','中子炮','等离子武器','小型防护罩',
+				'大型防护罩'
+				);
+			reAtk = /进攻者 [\w]*[^(]/;
+			reDef = /防御者 [\w]*[^(]/;
+			serverType = 2;
+			break;
+	}
+	for (var i in tmpunit) {
+		unitType[tmpunit[i]] = 1;
+	}
+	
+	myreg = /\n/;
+	result = myreg.exec(document.getElementsByName("srcReport")[0].value + "\n");
+	while(result != null){
+		remainStr = RegExp.rightContext;
+		if (!lineAnalyse(RegExp.leftContext)) return;
+		result = myreg.exec(remainStr);
+	}
+	
+	time = document.getElementsByName("time")[0].checked;
+	account = document.getElementsByName("account")[0].checked;
+	position = document.getElementsByName("position")[0].checked;
+	tech = document.getElementsByName("tech")[0].checked;
+	BBStype = parseInt(document.getElementsByName("BBStype")[0].value);
+
+	if (rptElmtChk()) {
+		cr = null;
+		rptElmt = null;
+		return;
+	}
+	rptElmtCal();
+	
+	switch (BBStype) {
+		case 1:
+		case 2:
+			PhpbbDBC();
+			break;
+		case 3:
+			
+			break;
+		case 4:
+			PhpbbSBC();
+			break;
+	}
+	
+	alert("转换完成！");
+	
+	
+	cr = null;
+	rptElmt = null;
+}
+
+
+function lineAnalyse(str)				//原始战斗报告的行分析
+{
+	if (lastresult) {
+		if(str.length > 1){
+			cr.result[iResult++] = str;
+		}
+		return true;
+	}
+	
+	switch (serverType) {
+		case 1:
+			rtn = str.match(/贏得了這次戰役/g) != null || str.match(/戰役不分勝負/g) != null;
+			break;
+		case 2:
+			rtn = str.match(/赢得了这次战役/g) != null || str.match(/战役不分胜负/g) != null;
+			break;
+	}
+	if(rtn){
+		lastresult = 1;
+		iResult = 0;
+		if(str.length > 1){
+			cr.result[iResult++] = str;
+		}
+	}
+	
+	//时间
+	tmp = str.match(/\d{2}-\d{2} \d{2}:\d{2}:\d{2}/);
+	if (tmp != null) {
+		cr.time = tmp;
+	}
+
+	//玩家ID和位置
+	tmp = str.match(reAtk);
+	if (tmp!=null) {
+		newstate = 0;
+	} else {
+		tmp = str.match(reDef);
+		if (tmp!=null) {
+			newstate = 1;
+		}
+	}
+	if (tmp !=null) {
+		playerID = tmp;
+		tmp = str.match(/\(\S+\)/);
+		if (cr.state != newstate) {
+			if (newstate==0) cr.current=-1;
+			cr.state = newstate;
+		}
+		cr.current++;
+		id=cr.current;
+		if (cr.player[id] == undefined) {
+			cr.player[id] = new playerInfo();
+			cr.player[id].identity = playerID;
+			cr.player[id].militancy = 1-newstate;
+			cr.player[id].position = (tmp == null) ? " " : tmp;
+		}
+	}
+	
+	//科技三项
+	if (str.match(/\d{2,3}%/g) != null) {
+		tmp = str.match(/\d{2,3}%/g);
+		if(tmp.length == 3){
+			cr.player[id].tech[0] = tmp[0];
+			cr.player[id].tech[1] = tmp[1];
+			cr.player[id].tech[2] = tmp[2];
+		}
+	}
+	
+	//舰队类型
+	switch (serverType) {
+		case 1:
+			rtn = str.match(/類型/);
+			break;
+		case 2:
+			rtn = str.match(/类型/);
+			break;
+	}
+	
+	if(rtn != null){
+		str = RegExp.rightContext;
+		if (cr.player[id].fleet[0] == null) {
+			var j=0;
+			while (rtn = reType.exec(str)) {
+				if (unitType[rtn[1]]) {
+					cr.player[id].fleet[j] = rtn[1];
+					cr.player[id].survival[j] = rtn[1];
+					//alert(rtn[1]);
+					j++;
+				} else {
+					alert("不知道的舰船类型:");
+					alert(rtn[1]);
+					return false;
+				}
+			}
+		} else {
+			var surv=0;
+			while (rtn = reType.exec(str)) {
+				while (surv < cr.player[id].fleet.length && cr.player[id].fleet[surv]!=rtn[1]) {
+					cr.player[id].survival[surv++] = null;
+				}
+				if (surv == cr.player[id].fleet.length) {
+					alert("凭空冒出来的舰船")
+					alert(rtn[1]);
+					return false;
+				}
+				cr.player[id].survival[surv++] = rtn[1];
+			}
+			while (surv < cr.player[id].fleet.length) {
+				cr.player[id].survival[surv++] = null;
+			}
+		}
+	}
+	
+	//舰队数目
+	switch (serverType) {
+		case 1:
+			rtn = str.match(/數目/g);
+			break;
+		case 2:
+			rtn = str.match(/数目/g);
+			break;
+	}
+	if(rtn != null){
+		var j=0;
+		if (cr.player[id].fleetnum[0] == null) {
+			while (rtn = reNum.exec(str)) {
+				cr.player[id].fleetnum[j] = rtn[0].replace(/\./g, "");
+				cr.player[id].survivalnum[j] = rtn[0].replace(/\./g, "");
+				j++;
+			}
+		} else {
+			while (rtn = reNum.exec(str)) {
+				while (cr.player[id].survival[j]==null) {
+					cr.player[id].survivalnum[j++]="0";
+				}
+				cr.player[id].survivalnum[j++]=rtn[0].replace(/\./g, "");
+			}
+			while (j<cr.player[id].survival.length) {
+				cr.player[id].survivalnum[j++] = "0";
+			}
+		}
+	}
+	
+	//
+	switch (serverType) {
+		case 1:
+			rtn = str.match(/摧毀/g);
+			break;
+		case 2:
+			rtn = str.match(/摧毁/g);
+			break;
+	}
+	if(rtn != null){
+		for(var i = 0; i < cr.player[id].fleet.length; i++){
+			cr.player[id].survivalnum[i] = 0;
+		}
+	}
+	return true;
+	
+}
+
+/************************************************************************************************************/
+//战斗报告基本要素检查
+
+function rptElmtChk()
+{
+	if (cr.time == null) {
+		cr.time = "unknown";
+	}
+	
+	if (cr.result[0] == null) {
+		cr.result[0] = "你给我的战报没有战斗结果哦。";
+	}
+	
+	for (var i in cr.player) {
+		if (cr.player[i].tech[0] == null) {
+			cr.player[i].tech[0] = "unknown";
+			cr.player[i].tech[1] = "unknown";
+			cr.player[i].tech[2] = "unknown";
+		}
+		if (cr.player[i].fleet[0] == null && cr.player[i].militancy == 1) {
+			alert("没有舰队怎么进攻?");
+			return 1;
+		}
+		for (var k in cr.player[i].fleet) {
+			if (cr.player[i].fleet[k]) 
+				cr.player[i].fleet[k]=cr.player[i].fleet[k].replace(/\./g, "");
+			if (cr.player[i].survival[k]) 
+				cr.player[i].survival[k]=cr.player[i].survival[k].replace(/\./g, "");
+
+			if (cr.player[i].fleetnum[k] == null) {
+				alert("幽灵舰队 —— 有看不见数量的舰队存在");
+				return 1;
+			}
+			if (cr.player[i].survivalnum[k] == null) {
+				cr.player[i].survivalnum[k] = "0";
+			}
+		}
+	}
+	
+	return 0;
+}
+
+/************************************************************************************************************/
+//战斗报告基本要素的标准计算处理
+//最终元素中数字处理　包括计算损失和千分化
+
+function rptElmtCal()
+{
+	rptElmt = new combatRpt();
+	
+	rptElmt.time = cr.time;
+
+	for (var i in cr.player) {
+		rptElmt.player[i] = new playerInfo();
+		rptElmt.player[i].militancy = cr.player[i].militancy;
+		rptElmt.player[i].identity = cr.player[i].identity;
+		rptElmt.player[i].position = cr.player[i].position;
+		rptElmt.player[i].tech = cr.player[i].tech;
+		//for (j = 0; j < cr.player[i].fleet.length; j++) {
+		for (var k in cr.player[i].fleet) {
+			rptElmt.player[i].fleet[k] = cr.player[i].fleet[k];
+			rptElmt.player[i].survival[k] = cr.player[i].survival[k];
+			rptElmt.player[i].fleetnum[k] = commaNum(cr.player[i].fleetnum[k]);
+			rptElmt.player[i].survivalnum[k] = commaNum(cr.player[i].survivalnum[k]);
+			rptElmt.player[i].lost[k] = commaNum("" + (parseInt(cr.player[i].fleetnum[k]) - parseInt(cr.player[i].survivalnum[k])));
+		}
+	}
+	
+	for (var i in cr.result) {
+		rptElmt.result[i] = cr.result[i].replace(/\n|\r/ig, "").replace(/\./g, ",");
+	}
+}
+
+/************************************************************************************************************/
+//常用工具函数
+
+function DBC2SBC(str)				//全角半角编码互转
+{
+	var ret="";
+	for(i = 0; i < str.length; i++){
+		if(str.charCodeAt(i) > 0xff00){
+			ret += String.fromCharCode(str.charCodeAt(i) - 0xfee0);
+		}else{
+			ret += str.charAt(i);
+		}
+	}
+	return ret;
+}
+
+function SBC2DBC(str)
+{
+	var ret="";
+	for(i = 0; i < str.length; i++){
+		if(str.charCodeAt(i) < 0xff && str.charCodeAt(i) > 0x20){
+			ret += String.fromCharCode(str.charCodeAt(i) + 0xfee0);
+		}else{
+			ret += (str.charAt(i) == " ") ? "　" : str.charAt(i);
+		}
+	}
+	return ret;
+}
+
+function commaNum(num)				//数字千分位显示
+{
+	num = num + "";  
+	var re = /(-?\d+)(\d{3})/;
+	while(re.test(num)){
+		num = num.replace(re, "$1,$2");
+	}
+	return num;
+}
+
+function showtech(thetech)
+{
+	return "武器："+thetech[0]+"　　防护盾："+thetech[1]+"　　外壳："+thetech[2];
+}
+
+/************************************************************************************************************/
+//Ogame中文官方论坛PhpBB
+
+verInfo = new Array(
+		"Ogame中文战斗报告转换工具",
+        "ACS Ver 1.07",
+        "一江春水制作",
+		"thrust 修改"
+        );
+
+attUnColor = "#ff8f8f";
+attDkColor = "#ff0000";
+defUnColor = "#0080ff";
+defDkColor = "#0000ff";
+
+function rptPhpbbDBCTypeSet()				//信息基本格式化
+{
+	rptElmt.time = time ? rptElmt.time[0] : "xx-xx xx:xx:xx";
+	for (var i in rptElmt.player) {
+		militancy = rptElmt.player[i].militancy==1 ? "进攻者 " : "防御者 ";
+		rptElmt.player[i].identity = account ? rptElmt.player[i].identity[0] : militancy;
+		rptElmt.player[i].position = position ? rptElmt.player[i].position[0] : "(x:xxx:xx)";
+		for (j = 0; j < rptElmt.player[i].tech.length; j++) {
+			rptElmt.player[i].tech[j] = SBC2DBC(rptElmt.player[i].tech[j]);
+		}
+		//for (j = 0; j < rptElmt.player[i].fleet.length; j++) {
+		for (var j in cr.player[i].fleet) {
+			rptElmt.player[i].fleet[j] = SBC2DBC(rptElmt.player[i].fleet[j]);
+			rptElmt.player[i].fleetnum[j] = SBC2DBC(rptElmt.player[i].fleetnum[j]);
+			rptElmt.player[i].survivalnum[j] = SBC2DBC(rptElmt.player[i].survivalnum[j]);
+			rptElmt.player[i].lost[j] = SBC2DBC(rptElmt.player[i].lost[j]);
+		}
+	}
+	
+	for(var i = 0; i < rptElmt.result.length; i++){
+		rptElmt.result[i] = (rptElmt.result[i]);
+	}
+}
+
+function fillPhpbbSpace(len)
+{
+	var ret = "";
+	for(i = 0; i < len; i++){
+		ret += space;
+	}
+	return ret;
+}
+
+function PhpbbAlignRight(str, len)
+{
+	var ret = "";
+	
+	ret += fillPhpbbSpace(len - str.length);
+	ret += str;
+	return ret;
+}
+
+function PhpbbAlignLeft(str, len)
+{
+	var ret = "";
+	
+	ret += str;
+	ret += fillPhpbbSpace(len - str.length);
+	return ret;
+}
+
+function PhpbbCenter(str, len)
+{
+	var ret = "";
+	
+	if(str.length >= len){
+		ret = str;
+	}else{
+		fillLeft = Math.ceil((len - str.length) / 2);
+		//fillRight = Math.floor((len - str.length) / 2);
+		ret += fillPhpbbSpace(fillLeft);
+		ret += str;
+		//ret += fillPhpbbSpace(fillRight);
+	}
+	return ret;
+}
+
+function PhpbbDBC()
+{
+	space = "　";
+	BBStype = document.getElementsByName("BBStype")[0].value;
+	for(var i = 0; i < document.getElementsByName("formatStyle").length; i++){
+		if(document.getElementsByName("formatStyle")[i].checked){
+			break;
+		}
+	}
+	
+	switch (i) {
+		case 0:
+			document.getElementsByName("dstReport")[0].value = PhpbbDBCHorizontal();
+			break;
+		case 1:
+			document.getElementsByName("dstReport")[0].value = PhpbbDBCVertical();
+			break;
+	}
+}
+
+function PhpbbDBCHorizontal()
+{	
+	var tmpstr;
+	rptPhpbbDBCTypeSet();
+	
+	colNum = 0;
+	for (var i in rptElmt.player) {
+		colNum = (colNum > rptElmt.player[i].fleet.length) ? colNum :
+		rptElmt.player[i].fleet.length;
+	}
+	colNum = (colNum * 8 + 4 < 60) ? 60 : (colNum * 8 + 4);
+	
+	tmpstr = "";
+	for(var i = 0; i < colNum * 2; i++){
+		tmpstr += "*";
+	}
+	tmpstr += crlf;
+	
+	tmp = rptElmt.time;
+	tmpstr += PhpbbCenter(tmp, colNum);
+	
+	for (var i in rptElmt.player) {
+		switch (rptElmt.player[i].militancy) {
+			case 1:
+				DkColor = attDkColor;
+				UnColor = attUnColor;
+				break;
+			case 0:
+				DkColor = defDkColor;
+				UnColor = defUnColor;
+				break;
+		}
+		tmpstr += crlf + "[color=" + DkColor + "]";
+		tmpstr+= crlf;
+		tmp = rptElmt.player[i].identity;
+		tmp += rptElmt.player[i].position;
+		tmpstr += PhpbbCenter(tmp, colNum);
+		tmpstr += crlf;
+		tmp = (tech) ? (showtech(rptElmt.player[i].tech)) : "";
+		if(tmp != ""){
+			tmpstr += PhpbbCenter(tmp, colNum);
+		}
+		tmpstr += "[/color]" + crlf;
+		
+		tmp = fillPhpbbSpace(Math.ceil((colNum - rptElmt.player[i].fleet.length * 8) / 2));
+		tmpa = tmp;
+		tmpb = tmp;
+		tmpc = tmp;
+		tmpd = tmp;
+		for (var j in cr.player[i].fleet) {
+			tmpa += "[color=" + ((j % 2) ? DkColor : UnColor) + "]" + PhpbbAlignRight(rptElmt.player[i].fleet[j], 8) + "[/color]";
+			tmpb += "[color=" + ((j % 2) ? DkColor : UnColor) + "]" + PhpbbAlignRight(rptElmt.player[i].fleetnum[j], 8) + "[/color]";
+			tmpc += "[u][color=" + ((j % 2) ? DkColor : UnColor) + "]" + PhpbbAlignRight(rptElmt.player[i].lost[j], 8) + "[/color][/u]";
+			tmpd += "[color=" + ((j % 2) ? DkColor : UnColor) + "]" + PhpbbAlignRight(rptElmt.player[i].survivalnum[j], 8) + "[/color]";
+		}
+		tmp = fillPhpbbSpace(Math.floor((colNum - rptElmt.player[i].fleet.length * 8) / 2));
+		tmpa += tmp;
+		tmpb += tmp;
+		tmpc += tmp;
+		tmpd += tmp;
+		tmpstr += crlf;
+		tmpstr += tmpa;
+		tmpstr += crlf;
+		tmpstr += tmpb;
+		tmpstr += crlf;
+		tmpstr += tmpc;
+		tmpstr += crlf;
+		tmpstr += tmpd;
+		tmpstr += crlf;
+	}
+	
+	for(var i = 0; i < rptElmt.result.length; i++){
+		tmpstr += crlf;
+		tmpstr += PhpbbCenter(rptElmt.result[i], colNum);
+	}
+	
+	tmpstr += "[color=#FF8040]" + crlf+crlf;
+	tmpstr += verInfo[0]+crlf;
+	tmpstr += verInfo[1]+crlf;
+	tmpstr += verInfo[2]+crlf;
+	tmpstr += verInfo[3]+crlf;
+	
+	if(BBStype != 1){
+		tmpstr = tmpstr.replace(/\[\w*\]|\[\/\w*\]|\[\w*=?#?\w*\]/gi, "");
+	}
+	
+	return tmpstr;
+}
+
+function PhpbbDBCVertical()
+{
+	var tmpstr;
+	rptPhpbbDBCTypeSet();
+	
+	tmpstr = rptElmt.time+crlf;
+	
+	for (var i in rptElmt.player) {
+		switch (rptElmt.player[i].militancy) {
+			case 1:
+				DkColor = attDkColor;
+				UnColor = attUnColor;
+				break;
+			case 0:
+				DkColor = defDkColor;
+				UnColor = defUnColor;
+				break;
+		}
+		tmpstr += "[color=" + DkColor + "]";
+		tmpstr += crlf;
+		tmpstr += rptElmt.player[i].identity;
+		tmpstr += rptElmt.player[i].position;
+		tmpstr += crlf;
+		if(tech){
+			tmpstr += showtech(rptElmt.player[i].tech)+crlf;
+		}
+		tmpstr += "[/color]";
+		//for(var j = 0; j < rptElmt.player[i].fleet.length; j++){
+		for (var j in cr.player[i].fleet) {
+			tmpstr += "[color=" + ((j % 2) ? DkColor : UnColor) + "]" +
+			PhpbbAlignRight(rptElmt.player[i].fleet[j], 8) +
+			PhpbbAlignRight(rptElmt.player[i].fleetnum[j], 8) +
+			PhpbbAlignRight("－", 2) +
+			PhpbbAlignRight(rptElmt.player[i].lost[j], 8) +
+			PhpbbAlignRight("＝", 2) +
+			PhpbbAlignRight(rptElmt.player[i].survivalnum[j], 8) +
+			"[/color]" + crlf;
+		}
+		//tmpstr += crlf;
+	}
+	for(var i = 0; i < rptElmt.result.length; i++){
+		tmpstr += crlf;
+		tmpstr += rptElmt.result[i];
+	}
+	
+	tmpstr += crlf+crlf;
+	tmpstr += verInfo[0]+crlf;
+	tmpstr += verInfo[1]+crlf;
+	tmpstr += verInfo[2]+crlf;
+	tmpstr += verInfo[3]+crlf;
+	
+	if(BBStype != 1){
+		tmpstr = tmpstr.replace(/\[\w*\]|\[\/\w*\]|\[\w*=?#?\w*\]/gi, "");
+	}
+	
+	return tmpstr;
+}
+
+function PhpbbSBC()
+{
+	for(var i = 0; i < document.getElementsByName("formatStyle").length; i++){
+		if(document.getElementsByName("formatStyle")[i].checked){
+			break;
+		}
+	}
+	
+	switch (i) {
+		case 0:
+			document.getElementsByName("dstReport")[0].value = PhpbbSBCHorizontal();
+			break;
+		case 1:
+			document.getElementsByName("dstReport")[0].value = PhpbbSBCVertical();
+			break;
+	}
+}
+
+function PhpbbSBCVertical()
+{
+	var tmpstr;
+	
+	tmpstr = "[center]" + rptElmt.time;
+	
+	for (var i in rptElmt.player) {
+		switch (rptElmt.player[i].militancy) {
+			case 1:
+				DkColor = attDkColor;
+				UnColor = attUnColor;
+				break;
+			case 0:
+				DkColor = defDkColor;
+				UnColor = defUnColor;
+				break;
+		}
+		tmpstr += "\n\r[color=" + DkColor + "]";
+		tmpstr += rptElmt.player[i].identity;
+		tmpstr += rptElmt.player[i].position;
+		tmpstr += crlf;
+		tmpstr += "[/color]" + crlf;
+		if(tech){
+			tmpstr += showtech(rptElmt.player[i].tech)+crlf+crlf;
+		}
+		for (var j in rptElmt.player[i].fleet) {
+			tmpstr += "[color=" + ((j % 2) ? DkColor : UnColor) + "]" +
+			rptElmt.player[i].fleet[j] + "  " +
+			rptElmt.player[i].fleetnum[j] + "[/color]" + crlf;
+		}
+		tmpstr += crlf;
+	}
+	
+	tmpstr += "\n\r[color=red][size=24]. . .  战 斗 中  . . .[/size][/color]\n\r\n\r\n\r";
+		
+	for (var i in rptElmt.player) {
+		switch (rptElmt.player[i].militancy) {
+			case 1:
+				DkColor = attDkColor;
+				UnColor = attUnColor;
+				break;
+			case 0:
+				DkColor = defDkColor;
+				UnColor = defUnColor;
+				break;
+		}
+		tmpstr += "\n\r[color=" + DkColor + "]";
+		tmpstr += rptElmt.player[i].identity;
+		tmpstr += rptElmt.player[i].position;
+		tmpstr += crlf;
+		tmpstr += "[/color]" + crlf;
+		
+		if (rptElmt.player[i].survival[0] == null) {
+			tmpstr += "[color=" + ((j % 2) ? DkColor : UnColor) + "]" + "摧毀"
+			+ "[/color]" + crlf;
+		} else {
+			for (var j in rptElmt.player[i].survival) {
+				tmpstr += "[color=" + ((j % 2) ? DkColor : UnColor) + "]" +
+				rptElmt.player[i].survival[j] + "  " +
+				rptElmt.player[i].survivalnum[j] + "[/color]" + crlf;
+			}
+		}
+		tmpstr += crlf;
+	}
+	
+	
+	for(var i = 0; i < rptElmt.result.length; i++){
+		tmpstr += crlf + rptElmt.result[i];
+	}
+	
+	tmpstr += crlf+crlf;
+	
+	tmpstr += "[color=#FF8040][SIZE=10]";
+	tmpstr += verInfo[0] + crlf;
+	tmpstr += verInfo[1] + crlf;
+	tmpstr += "[/size][/color]";
+	tmpstr += "[color=green][SIZE=10]";
+	tmpstr += verInfo[2] + crlf;
+	tmpstr += "[/size][/color]";
+	tmpstr += "[color=#FF8040][SIZE=10]";
+	tmpstr += verInfo[3] + crlf;
+	tmpstr += verInfo[4] + crlf;
+	tmpstr += "[url]" + verInfo[5] + "[/url]";
+	tmpstr += "[/size][/color][/center]";
+	
+	return tmpstr;
+}
+
+function PhpbbSBCHorizontal()
+{	
+	var tmpstr;
+	
+	tmpstr = "[center]" + rptElmt.time;
+	
+	for (var i in rptElmt.player) {
+		switch (rptElmt.player[i].militancy) {
+			case 1:
+				DkColor = attDkColor;
+				UnColor = attUnColor;
+				break;
+			case 0:
+				DkColor = defDkColor;
+				UnColor = defUnColor;
+				break;
+		}
+		tmpstr += "\n\r[color=" + DkColor + "]";
+		tmpstr += rptElmt.player[i].identity;
+		tmpstr += rptElmt.player[i].position;
+		tmpstr += crlf;
+		tmpstr += "[/color]" + crlf;
+		if(tech){
+			tmpstr += showtech(rptElmt.player[i].tech)+crlf+crlf;
+		}
+		tmpa = "";
+		tmpb = "";
+		for (var j in rptElmt.player[i].fleet) {
+			tmpa += "[color=" + ((j % 2) ? DkColor : UnColor) + "]" + rptElmt.player[i].fleet[j] + "[/color]" + "  ";
+			tmpb += "[color=" + ((j % 2) ? DkColor : UnColor) + "]" + rptElmt.player[i].fleetnum[j] + "[/color]" + "  ";
+		}
+		tmpstr += crlf;
+		tmpstr += tmpa;
+		tmpstr += crlf;
+		tmpstr += tmpb;
+		tmpstr += crlf;
+	}
+	
+	tmpstr += "\n\r[color=red][size=24]. . .  战 斗 中  . . .[/size][/color]\n\r\n\r\n\r";
+		
+	for (var i in rptElmt.player) {
+		switch (rptElmt.player[i].militancy) {
+			case 1:
+				DkColor = attDkColor;
+				UnColor = attUnColor;
+				break;
+			case 0:
+				DkColor = defDkColor;
+				UnColor = defUnColor;
+				break;
+		}
+		tmpstr += "\n\r[color=" + DkColor + "]";
+		tmpstr += rptElmt.player[i].identity;
+		tmpstr += rptElmt.player[i].position;
+		tmpstr += crlf;
+		tmpstr += "[/color]" + crlf;
+		
+		if (rptElmt.player[i].survival[0] == null) {
+			tmpstr += "[color=" + ((j % 2) ? DkColor : UnColor) + "]" + "摧毀"
+			+ "[/color]" + crlf;
+		} else {
+			tmpa = "";
+			tmpb = "";
+			for (var j in rptElmt.player[i].fleet) {
+				tmpa += "[color=" + ((j % 2) ? DkColor : UnColor) + "]" + rptElmt.player[i].survival[j] + "[/color]" + "  ";
+				tmpb += "[color=" + ((j % 2) ? DkColor : UnColor) + "]" + rptElmt.player[i].survivalnum[j] + "[/color]" + "  ";
+			}
+			tmpstr += crlf;
+			tmpstr += tmpa;
+			tmpstr += crlf;
+			tmpstr += tmpb;
+			tmpstr += crlf;
+		}
+		tmpstr += crlf;
+	}
+	
+	
+	for(var i = 0; i < rptElmt.result.length; i++){
+		tmpstr += crlf + rptElmt.result[i];
+	}
+	
+	tmpstr += crlf+crlf;
+	
+	tmpstr += "[color=#FF8040][SIZE=10]";
+	tmpstr += verInfo[0] + crlf;
+	tmpstr += verInfo[1] + crlf;
+	tmpstr += "[/size][/color]";
+	tmpstr += "[color=green][SIZE=10]";
+	tmpstr += verInfo[2] + crlf;
+	tmpstr += "[/size][/color]";
+	tmpstr += "[color=#FF8040][SIZE=10]";
+	tmpstr += verInfo[3] + crlf;
+	tmpstr += verInfo[4] + crlf;
+	tmpstr += "[url]" + verInfo[5] + "[/url]";
+	tmpstr += "[/size][/color][/center]";
+	
+	return tmpstr;
+}
+</script>
+
+<table name="Main" align="center" width="100%">
+	<tbody><tr><th>
+		<font color="Gray">
+		<text align="center">原始报告</text>
+		<br>
+		<textarea name="srcReport" id="srcReport" rows="9" cols="90" value=""></textarea>
+		<br><br>
+		<input name="account" id="account" checked="checked" type="checkbox">账号
+		<input name="position" id="position" type="checkbox">位置
+		<input name="time" id="time" type="checkbox">时间
+		<input name="tech" id="tech" type="checkbox">科技
+		<br><br>
+		服务器<select tabindex="1" name="Server" id="Server" style="width: 100px;">
+		<option value="2">CN 简体</option>
+		<option value="1">TW 繁体</option>
+		</select>
+		
+		<span title="这个版面格式比较暴力"><input name="formatStyle" id="formatStyle" type="radio">横版</span>
+		<input name="formatStyle" id="formatStyle" checked="checked" type="radio">纵版  
+		
+		格式<select tabindex="1" name="BBStype" id="BBStype" style="width: 100px;">
+		<option value="2">纯文本</option>
+		<option value="1">官方论坛</option>
+		<option value="4">org mode</option>
+		<option value="4">org mode</option>
+		</select>
+		<br><br>
+		<input name="convert" value="转换" onclick="rptCR()" type="button">
+		<br><br>
+		<textarea name="dstReport" id="dstReport" rows="9" cols="90" readonly="readonly"></textarea>
+		<br><br></font>
+		<font color="green">一江春水</font><font color="Gray">制作
+		<font color="green">thrust</font><font color="Gray">改进
+		<br>
+		Ver 1.07
+		<br>
+		支持纯文本、官方论坛格式；部分支持ACS联合攻击；增加仿Org常用模式；颜色问题，以后处理
+		<br>1.01改动：舰队数量小数点、战斗巡洋舰处理
+		<br>1.02改动：几个小bug
+		<br>1.03改动：增加了CN服务器的转换选项
+		<br>1.04改动：修改了Firefox下TAB和空格的处理错误
+		<br>1.05改动：修改CN服务器中导弹舰和轰炸机的错误
+		<br>1.06改动：修正了ACS下面同ID多舰队参与的bug * by thrust *
+		<br>1.07改动：修正了ACS下面舰队顺序的bug；<br>守方无舰队时的bug；<br>某种舰只完全被消灭时的bug；<br>以及1.06引入的一些新错误 * by thrust *
+		<br>诸位有什么意见建议，请和我联系 <a href="http://ogameworld.blog.hexun.com/">Blog</a> <a href="mailto:pauljoecor@hotmail.com">邮箱</a></font>
+		<br>
+		
+	</font></th>
+</tr></tbody></table>
+<br>
+<!-- vim: set encoding=chinese guifont=NSimSun: -->
+
+</body></html>

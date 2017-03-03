@@ -1,0 +1,36 @@
+<div id ="content">
+<DIV class=z id=bxx></DIV>
+<SCRIPT type=text/javascript>
+                v=new Date();
+                var bxx=document.getElementById('bxx');
+                function t(){
+                	n=new Date();
+                	ss=766;
+                	s=ss-Math.round((n.getTime()-v.getTime())/1000.);
+                	m=0;h=0;
+                	if(s<0){
+    
+                		bxx.innerHTML='完成<br><a href=index.php?page=buildings&session=cea603cc82bd&mode=Forschung&cp=33622696 >继续</a>';
+                	}else{
+                		if(s>59){
+                			m=Math.floor(s/60);
+                			s=s-m*60
+                		}
+                		if(m>59){
+                			h=Math.floor(m/60);
+                			m=m-h*60
+                		}
+                		if(s<10){
+                			s="0"+s
+                		}
+                		if(m<10){
+                			m="0"+m
+                		}
+                		bxx.innerHTML=h+":"+m+":"+s+"<br><a href=index.php?page=buildings&session=cea603cc82bd&unbau=111&mode=Forschung&cp=33622696"+
+                		">取消</a>"                	}
+                	;
+                	window.setTimeout("t();",999);
+                }
+                window.onload=t;
+                </SCRIPT>
+</DIV>

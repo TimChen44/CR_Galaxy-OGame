@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="CR_Galaxy.IOData" Collapsed="true">
+    <Position X="4" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>IOData.cs</FileName>
+      <HashCode>AMOAgBAIAoACACFAAJAEABABEEAAAEwAAQShAhMAEgg=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CR_Galaxy.Scanning" Collapsed="true">
+    <Position X="5.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Scanning.cs</FileName>
+      <HashCode>CAAACAAAAAAAAAAIBAIAAAEQAAAAAFAAAABAXAAAAAg=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CR_Galaxy.GalaxySystem" Collapsed="true">
+    <Position X="2.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>GalaxySystem.cs</FileName>
+      <HashCode>BACAAEAAAJAAAABAAACAAAJAIIABABAAAAAEUACAAKA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CR_Galaxy.ServerInfo" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>ServerInfo.cs</FileName>
+      <HashCode>AAEAAAAAABFCgQAAAAAAAAAAoCgAhAAAAQIUAgAQQAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CR_Galaxy.Login" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Login.cs</FileName>
+      <HashCode>AFAAAAEAACAABBAAAACAAAQSEKBYAAgAA2AQAgACACI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CR_Soft.Windows.Web.ClassWB" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="CR_Galaxy.Navigate" Collapsed="true">
+    <Position X="2.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Navigate.cs</FileName>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAgAAAAIAAAAgAAEBAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CR_Galaxy.ScanningRankings" Collapsed="true">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>ScanningRankings.cs</FileName>
+      <HashCode>AAAAAQAAAmAAAIAJABAAAAUSEQAAAEBIQMAAECABRAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CR_Galaxy.Charts" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Charts.cs</FileName>
+      <HashCode>AAIACAAAACAAAAAAAACQAAACAAAIAFAACACEBCABAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CR_Galaxy.Resources" Collapsed="true">
+    <Position X="5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Resources.cs</FileName>
+      <HashCode>vwEQAAAIAWAAARAAAEDAAQICCEhAggAgEAKBQigEQKA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="CR_Galaxy.Planet" Collapsed="true">
+    <Position X="7.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Planet.cs</FileName>
+      <HashCode>AAAQCAAACIEAAAQgAQIAAAAAAAAAgAADAAAGAQCAAIA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="CR_Galaxy.ExPlanet" Collapsed="true">
+    <Position X="7.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>ExPlanet.cs</FileName>
+      <HashCode>AAEQCAAACIEAAQQgAQIAAAAAAAgAgAADAAAGAQCAAIA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="CR_Galaxy.Rankings" Collapsed="true">
+    <Position X="7.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Rankings.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAARgACAAAAABAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+</ClassDiagram>

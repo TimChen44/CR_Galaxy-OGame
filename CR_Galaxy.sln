@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CR_Galaxy", "CR_Galaxy\CR_Galaxy.csproj", "{8CA08FE8-CA3D-4698-9215-B67F17936610}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpData", "UpData\UpData.csproj", "{8878B647-C7EF-4A49-9A42-D91984735C2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{261BF8EE-15A4-4678-A476-713E21BC6445}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OGLibrary", "OGLibrary\OGLibrary.csproj", "{B6B07524-782D-49B6-A66D-0881108201EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug64|Any CPU = Debug64|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Web|Any CPU = Web|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CA08FE8-CA3D-4698-9215-B67F17936610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CA08FE8-CA3D-4698-9215-B67F17936610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CA08FE8-CA3D-4698-9215-B67F17936610}.Debug64|Any CPU.ActiveCfg = Debug64|Any CPU
+		{8CA08FE8-CA3D-4698-9215-B67F17936610}.Debug64|Any CPU.Build.0 = Debug64|Any CPU
+		{8CA08FE8-CA3D-4698-9215-B67F17936610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CA08FE8-CA3D-4698-9215-B67F17936610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CA08FE8-CA3D-4698-9215-B67F17936610}.Web|Any CPU.ActiveCfg = Web|Any CPU
+		{8878B647-C7EF-4A49-9A42-D91984735C2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8878B647-C7EF-4A49-9A42-D91984735C2B}.Debug64|Any CPU.ActiveCfg = Debug64|Any CPU
+		{8878B647-C7EF-4A49-9A42-D91984735C2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8878B647-C7EF-4A49-9A42-D91984735C2B}.Web|Any CPU.ActiveCfg = Web|Any CPU
+		{261BF8EE-15A4-4678-A476-713E21BC6445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{261BF8EE-15A4-4678-A476-713E21BC6445}.Debug64|Any CPU.ActiveCfg = Debug64|Any CPU
+		{261BF8EE-15A4-4678-A476-713E21BC6445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{261BF8EE-15A4-4678-A476-713E21BC6445}.Release|Any CPU.Build.0 = Release|Any CPU
+		{261BF8EE-15A4-4678-A476-713E21BC6445}.Web|Any CPU.ActiveCfg = Release|Any CPU
+		{261BF8EE-15A4-4678-A476-713E21BC6445}.Web|Any CPU.Build.0 = Release|Any CPU
+		{B6B07524-782D-49B6-A66D-0881108201EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B07524-782D-49B6-A66D-0881108201EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6B07524-782D-49B6-A66D-0881108201EE}.Debug64|Any CPU.ActiveCfg = Debug64|Any CPU
+		{B6B07524-782D-49B6-A66D-0881108201EE}.Debug64|Any CPU.Build.0 = Debug64|Any CPU
+		{B6B07524-782D-49B6-A66D-0881108201EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B07524-782D-49B6-A66D-0881108201EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6B07524-782D-49B6-A66D-0881108201EE}.Web|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B07524-782D-49B6-A66D-0881108201EE}.Web|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

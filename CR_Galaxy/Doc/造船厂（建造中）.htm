@@ -1,0 +1,696 @@
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href='css/default.css' />
+    <link rel='stylesheet' type='text/css' href='css/formate.css' />
+
+    <script language="JavaScript">var session="5003ad752343";</script>
+
+    <meta http-equiv="content-type" content="text/html; charset=GB2312" />
+    <link rel="stylesheet" type="text/css" href="css/combox.css">
+    <link rel="stylesheet" type="text/css" href="http://uni8.ogame.cn.com/evolution/formate_asia.css" />
+    <title>Uni8 OGame</title>
+
+    <script src="js/utilities.js" type="text/javascript"></script>
+
+    <script language="JavaScript">
+    </script>
+
+    <script type="text/javascript" src="js/overLib/overlib.js"></script>
+
+    <!-- HEADER -->
+
+    <script language="JavaScript">
+function onBodyLoad() {
+    window.setTimeout("reloadImages()", 100);
+}
+
+function reloadImages() {
+    for (var i = 0; i < document.images.length; ++i) {
+      if ((document.images[i].className == 'reloadimage') && (document.images[i].title != "")) {
+        document.images[i].src = document.images[i].title;
+      }
+    }
+}
+    </script>
+
+</head>
+<body style="overflow: hidden;" onload="onBodyLoad();" onunload="">
+    <div id="overDiv" style="position: absolute; visibility: hidden; z-index: 1000;">
+    </div>
+    <div id='header_top'>
+        <center>
+            <table class='header'>
+                <tr class='header'>
+                    <td class='header' style='width: 5;'>
+                        <table class='header'>
+                            <tr class='header'>
+                                <td class='header'>
+                                    <img src="http://uni8.ogame.cn.com/evolution/planeten/small/s_dschjungelplanet07.jpg"
+                                        width="50" height="50">
+                                </td>
+                                <td class='header'>
+                                    <table class='header'>
+                                        <select size="1" onchange="haha(this)">
+                                            <option value="/game/index.php?page=buildings&session=5003ad752343&cp=33622696&mode=Flotte&gid=&messageziel=&re=0">
+                                                Zero <a href="index.php?page=galaxy&galaxy=1&system=280&position=4&session=5003ad752343">
+                                                    [1:280:4]</a></option>
+                                            <option value="/game/index.php?page=buildings&session=5003ad752343&cp=33626998&mode=Flotte&gid=&messageziel=&re=0"
+                                                selected>殖民星 <a href="index.php?page=galaxy&galaxy=4&system=276&position=6&session=5003ad752343">
+                                                    [4:276:6]</a></option>
+                                            <option value="/game/index.php?page=buildings&session=5003ad752343&cp=33630057&mode=Flotte&gid=&messageziel=&re=0">
+                                                殖民星 <a href="index.php?page=galaxy&galaxy=4&system=276&position=5&session=5003ad752343">
+                                                    [4:276:5]</a></option>
+                                        </select>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class='header'>
+                        <table class='header' id='resources' border="0" cellspacing="0" cellpadding="0" padding-right='30'>
+                            <tr class='header'>
+                                <td align="center" width="85" class='header'>
+                                    <img border="0" src="http://uni8.ogame.cn.com/evolution/images/metall.gif" width="42"
+                                        height="22">
+                                </td>
+                                <td align="center" width="85" class='header'>
+                                    <img border="0" src="http://uni8.ogame.cn.com/evolution/images/kristall.gif" width="42"
+                                        height="22">
+                                </td>
+                                <td align="center" width="85" class='header'>
+                                    <img border="0" src="http://uni8.ogame.cn.com/evolution/images/deuterium.gif" width="42"
+                                        height="22">
+                                </td>
+                                <td align="center" width="85" class='header'>
+                                    <a href="index.php?page=micropayment&session=5003ad752343">
+                                        <img border="0" src="img/dm_klein_2.jpg" width="42" height="22" title="暗物质"></a>
+                                </td>
+                                <td align="center" width="85" class='header'>
+                                    <img border="0" src="http://uni8.ogame.cn.com/evolution/images/energie.gif" width="42"
+                                        height="22">
+                                </td>
+                            </tr>
+                            <tr class='header'>
+                                <td align="center" class='header' width="85">
+                                    <i><b><font color="#ffffff">金属</font></b></i>
+                                </td>
+                                <td align="center" class='header' width="85">
+                                    <i><b><font color="#ffffff">晶体</font></b></i>
+                                </td>
+                                <td align="center" class='header' width="85">
+                                    <i><b><font color="#ffffff">重氢</font></b></i>
+                                </td>
+                                <td align="center" class='header' width="85">
+                                    <i><b><font color="#ffffff">暗物质</font></b></i>
+                                </td>
+                                <td align="center" class='header' width="85">
+                                    <i><b><font color="#ffffff">能量</font></b></i>
+                                </td>
+                            </tr>
+                            <tr class='header'>
+                                <td align="center" class='header' width="90">
+                                    <font>14.540</font>
+                                </td>
+                                <td align="center" class='header' width="90">
+                                    <font>7.299</font>
+                                </td>
+                                <td align="center" class='header' width="90">
+                                    <font>1.072</font>
+                                </td>
+                                <td align="center" class='header' width="90">
+                                    <font color="#FFFFFF">0</font>
+    </div>
+    </td>
+    <td align="center" class='header' width="90">
+        <font>63</font>/1.470
+    </td>
+    </tr> </table></td>
+    <td class='header'>
+        <table class='header' align="left">
+            <tr class='header'>
+                <td align="center" width="35" class='header'>
+                    <a href='index.php?page=micropayment&session=5003ad752343&session=5003ad752343' accesskey="i">
+                        <img border="0" src="img/commander_ikon_un.gif" width="32" height="32" alt="OGame指挥官"
+                            onmouseover="return overlib('<center><font size=1 color=white><b><br>OGame指挥官</font><br><br><a href=index.php?page=micropayment&session=5003ad752343&session=5003ad752343><font size=1 color=lime>现在就购买吧!</b></font></a></center>', LEFT, WIDTH, 150);"
+                            onmouseout="return nd();">
+                    </a>
+                </td>
+                <td align="center" width="35" class='header'>
+                    <a href='index.php?page=micropayment&session=5003ad752343&session=5003ad752343' accesskey="i">
+                        <img border="0" src="img/admiral_ikon_un.gif" width="32" height="32" alt="舰队指挥官"
+                            onmouseover="return overlib('<center><font size=1 color=white><b><br>舰队指挥官</font><br><font size=1 color=skyblue>最大舰队数目 +2</font><br><br><a href=index.php?page=micropayment&session=5003ad752343&session=5003ad752343><font size=1 color=lime>现在就购买吧!</b></font></a></center>', LEFT, WIDTH, 150);"
+                            onmouseout="return nd();">
+                    </a>
+                </td>
+                <td align="center" width="35" class='header'>
+                    <a href='index.php?page=micropayment&session=5003ad752343&session=5003ad752343' accesskey="i">
+                        <img border="0" src="img/ingenieur_ikon_un.gif" width="32" height="32" alt="工程师"
+                            onmouseover="return overlib('<center><font size=1 color=white><b><br>工程师</font><br><font size=1 color=skyblue>战斗中的损失减少一半,<br>+10% 的能量</font><br><br><a href=index.php?page=micropayment&session=5003ad752343&session=5003ad752343><font size=1 color=lime>现在就购买吧!</b></font></a></center>', LEFT, WIDTH, 150);"
+                            onmouseout="return nd();">
+                    </a>
+                </td>
+                <td align="center" width="35" class='header'>
+                    <a href='index.php?page=micropayment&session=5003ad752343&session=5003ad752343' accesskey="i">
+                        <img border="0" src="img/geologe_ikon_un.gif" width="32" height="32" alt="地质学者" onmouseover="return overlib('<center><font size=1 color=white><b><br>地质学者</font><br><font size=1 color=skyblue>+10% 资源产量</font><br><br><a href=index.php?page=micropayment&session=5003ad752343&session=5003ad752343><font size=1 color=lime>现在就购买吧!</b></font></a></center>', LEFT, WIDTH, 150);"
+                            onmouseout="return nd();">
+                    </a>
+                </td>
+                <td align="center" width="35" class='header'>
+                    <a href='index.php?page=micropayment&session=5003ad752343&session=5003ad752343' accesskey="i">
+                        <img border="0" src="img/technokrat_ikon_un.gif" width="32" height="32" alt="技术专家"
+                            onmouseover="return overlib('<center><font size=1 color=white><b><br>技术专家</font><br><font size=1 color=skyblue>+2 空间探测等级, <br>减少 25% 研究时间</font><br><br><a href=index.php?page=micropayment&session=5003ad752343&session=5003ad752343><font size=1 color=lime>现在就购买吧!</b></font></a></center>', LEFT, WIDTH, 150);"
+                            onmouseout="return nd();">
+                    </a>
+                </td>
+                <td align="center" class='header'>
+                </td>
+            </tr>
+        </table>
+    </td>
+    </tr> </table> </div><!-- END HEADER -->
+    <!-- LEFTMENU -->
+    <div id='leftmenu'>
+
+        <script language="JavaScript">
+function fenster(target_url,win_name) {
+  var new_win = window.open(target_url,win_name,'scrollbars=yes,menubar=no,top=0,left=0,toolbar=no,width=550,height=280,resizable=yes');
+  new_win.focus();
+}
+        </script>
+
+        <script language="JavaScript">
+function popUp(URL) {
+  day = new Date();
+  id = day.getTime();
+  eval("page" + id + " = window.open(URL, '" + id + "', 'toolbar=1,scrollbars=1,location=1,statusbar=1,menubar=0,resizable=1,width=120,height=60,alwaysLowered=Yes');");
+}
+
+        </script>
+
+        <center>
+            <div id='menu'>
+                <a href="mailto:barrierefrei@ogame.de" title="如有问题，请发送邮件至 barrierefrei@ogame.de."
+                    style="width: 1px;"></a>
+                <p style="width: 110px;">
+                    <nobr>宇宙 8 (<a href="index.php?page=changelog&session=5003ad752343">v 0.83</a>)</nobr>
+                </p>
+                <table width="110" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                            <img src="http://uni8.ogame.cn.com/evolution/gfx/ogame-produktion.jpg" width="110"
+                                height="40" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">
+                                <font color="#FFFFFF"><a href='index.php?page=overview&session=5003ad752343' accesskey="o">
+                                    概况</a> </font>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">
+                                <font color="#FFFFFF"><a href='index.php?page=b_building&session=5003ad752343' accesskey="b">
+                                    建筑</a> </font>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">
+                                <font color="#FFFFFF"><a href='index.php?page=resources&session=5003ad752343' accesskey="r">
+                                    资源</a> </font>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">
+                                <font color="#FFFFFF"><a href='index.php?page=trader&session=5003ad752343' accesskey="">
+                                    <font color='FF8900'>商人</font></a>
+                                    <!-- TODO Loca Keys -->
+                                </font>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">
+                                <font color="#FFFFFF"><a href='index.php?page=buildings&session=5003ad752343&mode=Forschung'
+                                    accesskey="c">研究</a> </font>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">
+                                <font color="#FFFFFF"><a href='index.php?page=buildings&session=5003ad752343&mode=Flotte'
+                                    accesskey="s">造船厂</a> </font>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">
+                                <font color="#FFFFFF"><a href='index.php?page=flotten1&session=5003ad752343&mode=Flotte'
+                                    accesskey="f">舰队</a> </font>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">
+                                <font color="#FFFFFF"><a href='index.php?page=techtree&session=5003ad752343' accesskey="t">
+                                    科技</a> </font>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">
+                                <font color="#FFFFFF"><a href='index.php?page=galaxy&session=5003ad752343&no_header=1'
+                                    accesskey="g">星系</a> </font>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">
+                                <font color="#FFFFFF"><a href='index.php?page=buildings&session=5003ad752343&mode=Verteidigung'
+                                    accesskey="d">防御</a> </font>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="http://uni8.ogame.cn.com/evolution/gfx/info-help.jpg" width="110" height="19">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">
+                                <font color="#FFFFFF"><a href='index.php?page=allianzen&session=5003ad752343' accesskey="a">
+                                    联盟</a> </font>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">
+                                <font color="#FFFFFF"><a href="http://board.ogame.com.cn" target="_new" accesskey="1">
+                                    论坛</a><!-- external link to board -->
+                                </font>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <a id='darkmatter2' style='cursor: pointer; width: 110px;' href='index.php?page=micropayment&session=5003ad752343'
+                                accesskey="i"><b>雇用事务官</a>
+                </b>
+            </div>
+            </td> </tr>
+            <tr>
+                <td>
+                    <div align="center">
+                        <font color="#FFFFFF"><a href='index.php?page=statistics&session=5003ad752343' accesskey="k">
+                            排名</a> </font>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div align="center">
+                        <font color="#FFFFFF"><a href='index.php?page=suche&session=5003ad752343' accesskey="h">
+                            搜索</a> </font>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div align="center">
+                        <font color="#FFFFFF"><a href="http://tutorial.ogame.com.cn" target="_new" accesskey="2">
+                            帮助</a><!-- external link to ogame tutorial -->
+                        </font>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="http://uni8.ogame.cn.com/evolution/gfx/user-menu.jpg" width="110" height="35">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div align="center">
+                        <font color="#FFFFFF"><a href='index.php?page=messages&dsp=1&session=5003ad752343'
+                            accesskey="m">消息</a> </font>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div align="center">
+                        <font color="#FFFFFF"><a href='#' onclick='fenster("index.php?page=notizen&session=5003ad752343&no_header=1", "Notizen");'
+                            accesskey="n">笔记</a> </font>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div align="center">
+                        <font color="#FFFFFF"><a href='index.php?page=buddy&session=5003ad752343' accesskey="u">
+                            好友</a> </font>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div align="center">
+                        <font color="#FFFFFF"><a href='index.php?page=options&session=5003ad752343' accesskey="p">
+                            选项</a> </font>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div align="center">
+                        <font color="#FFFFFF"><a href='index.php?page=logout&session=5003ad752343' accesskey="q">
+                            退出</a> </font>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div align="center">
+                        <font color="#FFFFFF"><a href="http://ogame.com.cn/regeln.html" target="_new">游戏规则</a>
+                            <!-- external link to rules -->
+                        </font>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div align="center">
+                        <font color="#FFFFFF"><a href="http://ogame.com.cn/portal/?go=contact&lang=cn" target="_new">
+                            法律条款</a>
+                            <!-- external link to impressum -->
+                        </font>
+                    </div>
+                </td>
+            </tr>
+            </table>
+        </center>
+    </div>
+    <!-- END LEFTMENU -->
+    <!-- CONTENT AREA -->
+    <div id='content'>
+        <center>
+            <title>建筑#Gebaeude </title>
+
+            <script type="text/javascript">
+
+function setMax(key, number){
+	document.getElementsByName('fmenge['+key+']')[0].value=number;
+}
+            </script>
+
+            <form action="index.php?page=buildings&session=5003ad752343&mode=Flotte" method="post">
+            <table align="top">
+                <tr>
+                    <td style='background-color: transparent;'>
+                        <table width="530">
+                            <tr>
+                                <td class="l" colspan="2">
+                                    更新描述
+                                </td>
+                                <td class="l">
+                                    <b>数量</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="l">
+                                    <a href="index.php?page=infos&session=5003ad752343&gid=202">
+                                        <img border='0' src="http://uni8.ogame.cn.com/evolution/gebaeude/202.gif" align='top'
+                                            width='120' height='120'>
+                                    </a>
+                                </td>
+                                <td class="l">
+                                    <a href="index.php?page=infos&session=5003ad752343&gid=202">小型运输舰</a></a> (5 available)<br>
+                                    小型运输舰是一种轻巧的舰艇，用来将资源从一个星球运送到另一个星球。<br>
+                                    需要： 金属: <b>2.000</b> 晶体: <b>2.000</b><br>
+                                    建造时间： 19分钟 12秒<br>
+                                    </th><td class="k">
+                                        <input type="text" name='fmenge[202]' alt='小型运输舰' size="6" maxlength="6" value="0"
+                                            tabindex="1">
+                                    </td>
+                            </tr>
+                            <tr>
+                                <td class="l">
+                                    <a href="index.php?page=infos&session=5003ad752343&gid=204">
+                                        <img border='0' src="http://uni8.ogame.cn.com/evolution/gebaeude/204.gif" align='top'
+                                            width='120' height='120'>
+                                    </a>
+                                </td>
+                                <td class="l">
+                                    <a href="index.php?page=infos&session=5003ad752343&gid=204">轻型战斗机</a><br>
+                                    轻型战斗机是一种灵活的舰艇，能在几乎所有的星球上找到。它的花费并不昂贵，连带着使得它的防护盾能源和装载量也不是特别高。<br>
+                                    需要： 金属: <b>3.000</b> 晶体: <b>1.000</b><br>
+                                    建造时间： 19分钟 12秒<br>
+                                    </th><td class="k">
+                                        <input type="text" name='fmenge[204]' alt='轻型战斗机' size="6" maxlength="6" value="0"
+                                            tabindex="1">
+                                    </td>
+                            </tr>
+                            <tr>
+                                <td class="l">
+                                    <a href="index.php?page=infos&session=5003ad752343&gid=208">
+                                        <img border='0' src="http://uni8.ogame.cn.com/evolution/gebaeude/208.gif" align='top'
+                                            width='120' height='120'>
+                                    </a>
+                                </td>
+                                <td class="l">
+                                    <a href="index.php?page=infos&session=5003ad752343&gid=208">殖民船</a><br>
+                                    这种船舰的存在意义，就是为了要探索人类过去从未到达之处，并开拓新世界。<br>
+                                    需要： 金属: <b>10.000</b> 晶体: <b>20.000</b> 重氢: <b>10.000</b><br>
+                                    建造时间： 2小时 24分钟
+                                    <br>
+                                    </th><td class="k">
+                                    </td>
+                            </tr>
+                            <tr>
+                                <td class="l">
+                                    <a href="index.php?page=infos&session=5003ad752343&gid=210">
+                                        <img border='0' src="http://uni8.ogame.cn.com/evolution/gebaeude/210.gif" align='top'
+                                            width='120' height='120'>
+                                    </a>
+                                </td>
+                                <td class="l">
+                                    <a href="index.php?page=infos&session=5003ad752343&gid=210">探测器</a><br>
+                                    小巧灵活的探测器，搭载高效能的推进机构，它能够提供遥远的星球上的信息。<br>
+                                    需要： 晶体: <b>1.000</b><br>
+                                    建造时间： 4分钟 48秒<br>
+                                    </th><td class="k">
+                                        <input type="text" name='fmenge[210]' alt='探测器' size="6" maxlength="6" value="0"
+                                            tabindex="1">
+                                    </td>
+                            </tr>
+                            <tr>
+                                <td class="l">
+                                    <a href="index.php?page=infos&session=5003ad752343&gid=212">
+                                        <img border='0' src="http://uni8.ogame.cn.com/evolution/gebaeude/212.gif" align='top'
+                                            width='120' height='120'>
+                                    </a>
+                                </td>
+                                <td class="l">
+                                    <a href="index.php?page=infos&session=5003ad752343&gid=212">太阳能卫星</a><br>
+                                    太阳能卫星装备了太阳能电池，是构造简单的轨道卫星，它会把搜集到的能量传回到星球的地表上。这些能量使用特殊的雷射光来传输。<br>
+                                    需要： 晶体: <b>2.000</b> 重氢: <b>500</b><br>
+                                    建造时间： 9分钟 36秒<br>
+                                    </th><td class="k">
+                                        <input type="text" name='fmenge[212]' alt='太阳能卫星' size="6" maxlength="6" value="0"
+                                            tabindex="1">
+                                    </td>
+                            </tr>
+                            <td class="c" colspan="2" align="center">
+                                <input type="submit" value="发送">
+                            </td>
+                </tr>
+            </table>
+            </form>
+            </table>
+            <br>
+            正在建造：
+            <div id="bx" class="z">
+            </div>
+            <!-- JAVASCRIPT -->
+
+            <script type="text/javascript">
+v = new Date();
+p = 0;
+g = 1175;
+s = 0;
+hs = 0;
+of = 1;
+c = new Array(8640,576,"");
+b = new Array("殖民船","太阳能卫星","");
+a = new Array("1","1","");
+aa = "任务完成";
+
+
+function t() {
+	if (hs == 0) {
+		xd();
+		hs = 1;
+	}
+	n = new Date();
+	s = c[p]-g-Math.round((n.getTime()-v.getTime())/1000.);
+	s = Math.round(s);
+	m = 0;
+	h = 0;
+	if (s < 0) {
+		a[p]--;
+		xd();
+		if (a[p] <= 0) {
+			p++;
+			xd();
+		}
+		g = 0;
+		v = new Date();
+		s=0;
+	}
+	if (s > 59) {
+		m = Math.floor(s / 60);
+		s = s - m * 60;
+	}
+	if (m > 59) {
+		h = Math.floor(m / 60);
+		m = m - h * 60;
+	}
+	if (s < 10) {
+		s = "0" + s;
+	}
+	if (m < 10) {
+		m = "0" + m;
+	}
+	if (p > b.length - 2) {
+		document.getElementById("bx").innerHTML=aa ;
+	} else {
+		document.getElementById("bx").innerHTML=b[p]+" "+h+":"+m+":"+s;
+	}
+	window.setTimeout("t();", 200);
+}
+
+
+
+
+function xd() {
+	while (document.Atr.auftr.length > 0) {
+		document.Atr.auftr.options[document.Atr.auftr.length-1] = null;
+	}
+	if (p > b.length - 2) {
+		document.Atr.auftr.options[document.Atr.auftr.length] = new Option(aa);
+	}
+	for (iv = p; iv <= b.length - 2; iv++) {
+		if (a[iv] < 2) {
+			ae=" ";
+		}else{
+			ae=" ";
+		}
+		if (iv == p) {
+			act = " (建造中)";
+		}else{
+			act = "";
+		}
+		document.Atr.auftr.options[document.Atr.auftr.length] = new Option(a[iv]+ae+" \""+b[iv]+"\""+act, iv + of);
+	}
+}
+
+window.onload = t;
+            </script>
+
+            <!-- JAVASCRIPT ENDE-->
+            <br>
+            <form name="Atr" method="get" action="index.php?page=buildings">
+            <input type="hidden" name="session" value="5003ad752343">
+            <input type="hidden" name="mode" value="Flotte">
+            <table width="530">
+                <tr>
+                    <td class="c">
+                        等待建造的设施
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <select name="auftr" size="10">
+                        </select>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="c">
+                    </td>
+                </tr>
+            </table>
+            </form>
+            建造所需时间： 2 小时 14 分钟 01 秒<br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </center>
+    </div>
+    <!-- END CONTENT AREA -->
+
+    <script>
+messageboxHeight=0;
+errorboxHeight=0;
+contentbox = document.getElementById('content');
+    </script>
+
+    <div id='messagebox'>
+        <center>
+        </center>
+    </div>
+    <div id='errorbox'>
+        <center>
+        </center>
+    </div>
+
+    <script>
+headerHeight = 81;
+errorbox.style.top=parseInt(headerHeight+messagebox.offsetHeight+5)+'px';
+contentbox.style.top=parseInt(headerHeight+errorbox.offsetHeight+messagebox.offsetHeight+10)+'px';
+if (navigator.appName=='Netscape'){if (window.innerWidth<1020){document.body.scroll='no';}   contentbox.style.height=parseInt(window.innerHeight)-messagebox.offsetHeight-errorbox.offsetHeight-headerHeight-20;
+if(document.getElementById('resources')) {   document.getElementById('resources').style.width=(window.innerWidth*0.4);}}
+ else {
+if (document.body.offsetWidth<1020){document.body.scroll='no';}   contentbox.style.height=parseInt(document.body.offsetHeight)-messagebox.offsetHeight-headerHeight-errorbox.offsetHeight-20;document.getElementById('resources').style.width=(document.body.offsetWidth*0.4);
+}for (var i = 0; i < document.links.length; ++i) {
+  if (document.links[i].href.search(/.*redir\.php\?url=.*/) != -1) {
+    document.links[i].target = "_blank";
+  }
+}
+
+    </script>
+
+    <style>
+        .layer
+        {
+            z-index: 999999999;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 757px;
+            height: 475px;
+            background-color: #040e1e;
+            border: 3px double orange;
+            padding: 0;
+            opacity: .90;
+        }
+    </style>
+</body>
+</html>

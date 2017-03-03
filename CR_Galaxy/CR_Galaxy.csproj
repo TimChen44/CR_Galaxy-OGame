@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8CA08FE8-CA3D-4698-9215-B67F17936610}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CR_Galaxy</RootNamespace>
+    <AssemblyName>CR_Galaxy</AssemblyName>
+    <ApplicationIcon>computer.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>Migrated rules for CR_Galaxy.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Web|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Web\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>Migrated rules for CR_Galaxy.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug64|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug64\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>Migrated rules for CR_Galaxy.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClassLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dll\ClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Control, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\C#控件\CR_Soft\Control\bin\Control.dll</HintPath>
+    </Reference>
+    <Reference Include="CR_Soft.Control, Version=1.3.3164.38564, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\C Sharp控件\CR_Soft 3.3\Release\CR_Soft.Control.dll</HintPath>
+    </Reference>
+    <Reference Include="CR_Soft.Data, Version=3.3.3166.18767, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\C Sharp控件\CR_Soft 3.3\Release\CR_Soft.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="CR_Soft.Lib, Version=2.2.3151.36189, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\C Sharp控件\CR_Soft 3.3\Release\CR_Soft.Lib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\WINDOWS\assembly\GAC_MSIL\System.Web.Services\2.0.0.0__b03f5f7f11d50a3a\System.Web.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Windows.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dll\Windows.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Charts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Charts.Designer.cs">
+      <DependentUpon>Charts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OGControl\BuildHelper.cs" />
+    <Compile Include="OGControl\Calc.cs" />
+    <Compile Include="OGControl\FlottenCommand.cs" />
+    <Compile Include="OGControl\FleetHelper.cs" />
+    <Compile Include="OGControl\FleetInfo.cs" />
+    <Compile Include="OGControl\FlotteHelper.cs" />
+    <Compile Include="OGControl\ForschungHelper.cs" />
+    <Compile Include="OGControl\info.cs" />
+    <Compile Include="OGControl\ObjectClass.cs" />
+    <Compile Include="OGControl\OGControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OGControl\OGControl.Designer.cs">
+      <DependentUpon>OGControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OGControl\OGControlManage.cs" />
+    <Compile Include="OGControl\OGMilitary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OGControl\OGMilitary.Designer.cs">
+      <DependentUpon>OGMilitary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OGControl\ResRead.cs" />
+    <Compile Include="ExPlanet.cs" />
+    <Compile Include="Galaxy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Galaxy.designer.cs">
+      <DependentUpon>Galaxy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GalaxySystem.cs" />
+    <Compile Include="IOData.cs" />
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Navigate.cs" />
+    <Compile Include="OGControl\VerteidigungHelper.cs" />
+    <Compile Include="Planet.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutBox.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Charts.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Charts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OGControl\OGControl.resx">
+      <DependentUpon>OGControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Galaxy.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Galaxy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OGControl\OGMilitary.resx">
+      <DependentUpon>OGMilitary.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Resources.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Migrated rules for CR_Galaxy.ruleset" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Rankings.cs" />
+    <Compile Include="Resources.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Resources.Designer.cs">
+      <DependentUpon>Resources.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Scanning.cs" />
+    <Compile Include="ScanningRankings.cs" />
+    <Compile Include="ServerInfo.cs" />
+    <Compile Include="Settings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="computer.ico" />
+    <None Include="Img\metall.gif" />
+    <Content Include="Doc\多星球.htm" />
+    <Content Include="Doc\建造%28可建造%29.htm" />
+    <Content Include="Doc\建造%28可建造2%29.htm" />
+    <Content Include="Doc\建造%28建造中%29.htm" />
+    <Content Include="Doc\建造.htm" />
+    <Content Include="Doc\消息发送.htm" />
+    <Content Include="Doc\研究.htm" />
+    <Content Include="Doc\舰队建造.htm" />
+    <Content Include="Doc\舰队控制参数含义.htm" />
+    <Content Include="Doc\舰队控制（完成）.htm" />
+    <Content Include="Doc\舰队状态.htm" />
+    <Content Include="Doc\舰队状态2.htm" />
+    <Content Include="Doc\舰队状态（探测）.htm" />
+    <Content Include="Doc\舰队状态（收攻击）.htm" />
+    <Content Include="Doc\舰队状态（混合攻击）.htm" />
+    <Content Include="Doc\舰队状态（混合运输）.htm" />
+    <Content Include="Doc\舰队状态（联合攻击）.htm" />
+    <Content Include="Doc\舰队状态（间谍攻击2）.htm" />
+    <Content Include="Doc\舰队状态（间谍攻击）.htm" />
+    <Content Include="Doc\舰队（可招回）.htm" />
+    <Content Include="Doc\舰队（完成指挥）.htm" />
+    <Content Include="Doc\舰队（数量选择、无航线）.htm" />
+    <Content Include="Doc\舰队（数量选择、有航线）.htm" />
+    <Content Include="Doc\舰队（目的地选择）.htm" />
+    <Content Include="Doc\舰队（资源选择、混编）.htm" />
+    <Content Include="Doc\舰队（资源选择）.htm" />
+    <Content Include="Doc\资源.htm" />
+    <Content Include="Doc\资源（太电）.htm" />
+    <Content Include="Doc\资源（核电站）.htm" />
+    <Content Include="Doc\造船厂.htm" />
+    <Content Include="Doc\造船厂（建造中）.htm" />
+    <Content Include="Doc\造船厂（有船）.htm" />
+    <Content Include="Doc\防御%28无法建造%29.htm" />
+    <Content Include="Doc\防御%28部分建造%29.htm" />
+    <Content Include="Img\deuterium.gif" />
+    <Content Include="Img\energie.gif" />
+    <Content Include="Img\kristall.gif" />
+    <None Include="subscriptions.ico" />
+    <Content Include="OGControl\FS_Info.txt" />
+    <Content Include="OGLibrary.csproj" />
+    <Content Include="Tool\Converter.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OGLibrary\OGLibrary.csproj">
+      <Project>{B6B07524-782D-49B6-A66D-0881108201EE}</Project>
+      <Name>OGLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
