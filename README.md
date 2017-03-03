@@ -10,3 +10,8 @@ OGame扫图软件
 ##这里的代码是我十年前的水平，写的比较烂，各位见谅
 
 ##软件截图
+![alt tag](./img/1.jpg)
+
+![alt tag](./img/2.jpg)
+
+![alt tag](./img/J1.JPG)
